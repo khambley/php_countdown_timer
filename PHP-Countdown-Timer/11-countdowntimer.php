@@ -80,11 +80,14 @@ p.numbers {
 
 <body>
 <?php
-//mktime turns given date into seconds
-$targetdate = mktime(0,0,0,12,25,2014);
+//mktime returns given date into seconds
+$currentYear = date('Y');
+$targetdate = mktime(0,0,0,12,25,$currentYear);
 
 // time gets current date in seconds
 $currentdate = time();
+//add if statement to check if the holiday date has passed currentdate
+
 
 //subtract targetdate from current date will give you the seconds until targetdate is reached
 $difference = ($targetdate - $currentdate);
@@ -106,7 +109,7 @@ $seconds = $minutes_fraction * 60;
 $seconds_whole = floor($seconds);
 $seconds_fraction = $seconds - $seconds_whole;
 ?>
-<h1>Countdown until Christmas <br />December 25, 2014 at midnight (12:00:00 AM)</h1>
+<h1>Countdown until Christmas <br />December 25, <?php echo $currentYear; ?> at midnight (12:00:00 AM)</h1>
 <h2>The current day and time is <?php echo date("F d, Y h:i a"); ?></h2>
 
 <div class="container">
