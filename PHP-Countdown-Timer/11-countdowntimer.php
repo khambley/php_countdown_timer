@@ -80,18 +80,29 @@ p.numbers {
 
 <body>
 <?php
-//mktime returns given date into seconds
-$currentYear = date('Y');
-$targetdate = mktime(0,0,0,12,25,$currentYear);
+
+$targetmonth = 12;
+$targetday = 25;
+$currentdate_array = getdate();
+$currentday = $currentdate_array['mday'];
+$currentmonth = $currentdate_array['month'];
 
 // time gets current date in seconds
 $currentdate = time();
 //add if statement to check if the holiday date has passed currentdate
-
-
 //subtract targetdate from current date will give you the seconds until targetdate is reached
-$difference = ($targetdate - $currentdate);
-
+if ($currentmonth <= $targetmonth && $currentday < $targetday) {
+        $currentYear = date('Y');
+        //mktime returns given date into seconds
+        $targetdate = mktime(0,0,0,12,25,$currentYear);
+        $difference = ($targetdate - $currentdate);
+} else {
+    $currentYear = date('Y') + 1;
+    //mktime returns given date into seconds
+    $targetdate = mktime(0,0,0,12,25,$currentYear);
+    $difference = ($targetdate - $currentdate);
+    
+}
 //Divide the calculated seconds by how many seconds in a day will give you total days until targetdate
 $days = $difference / 86400; //86400 seconds in a day
 $days_whole = floor($days);
